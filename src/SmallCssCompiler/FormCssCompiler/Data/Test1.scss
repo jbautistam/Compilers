@@ -1,0 +1,84 @@
+﻿@import _Test1.scss
+
+body
+	color: red
+	background-color: $ColorBackground
+
+_DashBoard es la clase utilizada por
+	todos las pizarras de la aplicación
+.DashBoard
+	.Numeric 
+		text-align: center
+		font-size: 1.3em
+		a
+			font-size: 1.3em
+	tr 
+		th
+			font-size: 1.2em
+			height: 1.4em
+			padding: 5px
+			background-color: #000080
+			color: White
+			font-weight: bold
+		td 
+			padding: 5px
+			border-right: $BorderStyle $BorderWidth $BorderColor
+			.rowGrid
+				background-color: #ebebeb
+				color: Black
+			.rowGridAlternate
+				background-color: White
+				color: Black
+			a
+				color: Black
+				font-weight: bold
+				font-size: 2em
+				text-align: center
+				text-decoration: underline
+			a:hover
+				text-decoration: none
+			border-left: $BorderFullStyle
+
+	.rowGridEnAlta
+		background-color: white
+		@include borders
+		color: Black
+
+	.rowGridAlternateEnAlta
+		background-color: #FFFFCC
+		color: Black
+
+	.rowGridEnPlazo
+		background-color: #CCFFCC
+		color: Black
+
+	.rowGridAlternateEnPlazo
+		background-color: #CCFF99
+		color: Black
+
+	.rowGridProximoVencimiento
+		background-color: #FF9966
+		color: Black
+
+	.rowGridAlternateProximoVencimiento
+		background-color: #FF5500
+		color: Black
+
+	.rowGridFueraPlazo
+		background-color: Red
+		color: Black
+		border-right: 4px solid navy
+
+	.rowGridAlternateFueraPlazo
+		background-color: #e00000
+		color: Black
+		border-right: 4px solid navy
+
+p
+	font-size: 12pt
+
+.Block
+	@include BlockData
+
+.Article
+	@include ArticleBlockData

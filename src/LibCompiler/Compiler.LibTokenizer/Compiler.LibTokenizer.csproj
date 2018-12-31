@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Bau.Libraries.Compiler.LibTokenizer</RootNamespace>
+    <AssemblyName>Compiler.LibTokenizer</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Errors\**" />
+    <Compile Remove="EventArgs\**" />
+    <Compile Remove="Interpreter\**" />
+    <Compile Remove="Variables\**" />
+    <EmbeddedResource Remove="Errors\**" />
+    <EmbeddedResource Remove="EventArgs\**" />
+    <EmbeddedResource Remove="Interpreter\**" />
+    <EmbeddedResource Remove="Variables\**" />
+    <None Remove="Errors\**" />
+    <None Remove="EventArgs\**" />
+    <None Remove="Interpreter\**" />
+    <None Remove="Variables\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\LibHelper.Standard\LibHelper.Standard.csproj" />
+  </ItemGroup>
+
+</Project>

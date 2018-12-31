@@ -1,0 +1,25 @@
+﻿body 
+	#page 
+		#header 
+			#logo
+				width: 87px
+				height: 107px
+				display: inline-block
+				float: left
+				background: white url("../../images/Logos/LogoGrupoBC.png") no-repeat
+				background-position: center center
+		
+.logoTop
+	background: white url("images/LogoHeaderGrupoBC.bmp") no-repeat
+	width: 145px
+	height: 20px
+		
+.logoBottom
+	background: white url("images/LogoHeaderCosmos.bmp") no-repeat
+	width: 145px
+	height: 20px
+		
+.logoBottomFull
+	background: white url("images/LogoHeaderGrupoBCFull.gif") no-repeat
+	width: 200px
+	height: 20px

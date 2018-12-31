@@ -1,0 +1,30 @@
+﻿/* Layout de Cosmos para la Web de CaixaCatalunya */
+
+/* Logo de la página de inicio de sesión */
+body #page #header #logo
+	{ width: 280px;
+	  height: 55px;
+		display: inline-block;
+		float: left;
+		background: white url("images/Logo.jpg") no-repeat;
+		background-position: center center;
+	}
+		
+/* Logo superior de la cabecera de página de Cosmos */
+logoTop
+	{ background: white url("images/LogoHeaderGrupoBC.bmp") no-repeat;
+	  width: 145px;
+	  height: 20px;
+	}
+		
+/* Logo inferior de la cabecera de página de Cosmos */
+logoBottom
+	{ background: white url("images/LogoHeaderCosmos.bmp") no-repeat;
+	  width: 145px;
+	  height: 20px;
+	}
+
+/* Cabecera H1 para los bloques */
+.Block h1
+	{ background-color: Red;
+	}

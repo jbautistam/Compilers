@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Bau.Libraries.LibTokenizer</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\LibHelper.Standard\LibHelper.Standard.csproj" />
+    <ProjectReference Include="..\..\..\Common\LibMarkup.Standard\LibMarkup.Standard.csproj" />
+  </ItemGroup>
+
+</Project>

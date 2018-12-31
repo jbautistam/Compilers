@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E5AF4B6E-1A68-48AB-B2CE-51B51FC33A7A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bau.Libraries.LibSmallCssCompiler</RootNamespace>
+    <AssemblyName>LibSmallCssCompiler</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CompilerConstants.cs" />
+    <Compile Include="Compiler\Instructions\InstructionIfDefined.cs" />
+    <Compile Include="Compiler\Instructions\InstructionMedia.cs" />
+    <Compile Include="Compiler\Translator.cs" />
+    <Compile Include="Compiler\Parser.cs" />
+    <Compile Include="Compiler\Instructions\InstructionIncludeFile.cs" />
+    <Compile Include="Compiler\Instructions\InstructionMixinCall.cs" />
+    <Compile Include="Compiler\Instructions\InstructionLineCss.cs" />
+    <Compile Include="Compiler\Tokenizer.cs" />
+    <Compile Include="Compiler\TokenSmallCss.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Compiler\TokenSmallCssCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Compiler\WriterCss.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SmallCssCompiler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\LibHelper.Standard\LibHelper.Standard.csproj">
+      <Project>{C3C548FB-D8FA-428D-9F0C-0BD8A3B3CD9C}</Project>
+      <Name>LibHelper.Standard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\LibSystem\LibSystem.csproj">
+      <Project>{15653e4e-c834-4db7-8d99-e80c32de7b3a}</Project>
+      <Name>LibSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LibTokenizer\LibTokenizer\LibTokenizer.csproj">
+      <Project>{2fcd6829-e25f-4e39-86d8-9d861805efed}</Project>
+      <Name>LibTokenizer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

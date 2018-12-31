@@ -1,0 +1,225 @@
+﻿_ Layout de un artículo de cabecera
+$mixin LayoutLeadingArticle
+	background-color: $LeadingArticleColorBackground
+	display: inline-block
+	width: 98%
+	padding-bottom: 50px
+	margin-top: 20px
+	margin-bottom: 20px
+
+_ Layout de un artículo de resumen
+$mixin LayoutSummaryArticle
+	display: inline-block
+	border: 1px solid #000000
+	border-radius: 15px 15px 15px 15px
+	background-color: $ArticleColorBackground
+	box-shadow: 5px 5px black
+	width: 98%
+	margin-bottom: 20px
+	padding: 10px
+	
+_ Layout de un artículo
+$mixin LayoutArticle
+	display: inline-block
+	border: 1px solid #000000
+	border-radius: 15px 15px 15px 15px
+	background-color: $ArticleColorBackground
+	box-shadow: 5px 5px black
+	width: 95%
+	margin-bottom: 20px
+	padding: 10px
+	
+_ Layout de un artículo de imagen
+$mixin LayoutImageArticle
+	display: inline-block
+	border: 1px solid #000000
+	border-radius: 15px 15px 15px 15px
+	background-color: $ArticleColorBackground
+	box-shadow: 5px 5px black
+	width: 95%
+	margin-bottom: 20px
+	padding: 10px
+	
+_ Imagen principal de un artículo de imagen
+$mixin ImageArticleThumbMain
+	display: inline-block
+	float: rigth
+	border: 1px solid #B1B1B1
+	background-color: #E3E3E3
+	border-radius: 5px 5px 5px 5px
+	width: 375px
+	_ box-shadow: 5px 5px black
+	img
+		width: 365px
+		margin: 5px
+		
+_ Cabeceras de un artículo
+$mixin HeaderArticle
+	h1
+		font-size: 1.4em
+		padding: 5px 15px
+		color: black
+		border-bottom: solid 1px black
+	h2
+		font-size: 1.4em
+		a
+			color: navy
+			text-decoration: underline
+		a:hover
+			text-decoration: none
+	h4
+		font-size: 1.1em
+		padding-left: 50px
+		color: black
+
+_ Layout para el resumen de tipo imagen grande
+$mixin LayoutSummaryGalleryBig
+	display: block
+	border: 1px solid #000000
+	border-radius: 15px 15px 15px 15px
+	background-color: $ArticleColorBackground
+	box-shadow: 5px 5px black
+	width: 40%
+	margin-right: 20px
+	margin-bottom: 20px
+	padding: 20px
+	float: left
+	height: 500px
+	
+_ Cabecera para el resumen de tipo imagen grande
+$mixin HeaderSummaryGalleryBig
+	h2
+		font-size: 1.4em
+		padding: 5px 15px
+		a
+			color: navy
+			text-decoration: underline
+		a:hover
+			text-decoration: none
+
+_ Layout para el resumen de tipo imagen pequeña
+$mixin LayoutSummaryGallerySmall
+	display: block
+	border: 1px solid #000000
+	border-radius: 15px 15px 15px 15px
+	background-color: $ArticleColorBackground
+	box-shadow: 5px 5px black
+	width: 30%
+	margin-right: 20px
+	margin-bottom: 20px
+	padding-bottom: 20px
+	float: left
+	height: 250px
+	
+_ Cabecera para el resumen de tipo imagen pequeña
+$mixin HeaderSummaryGallerySmall
+	h2
+		font-size: 1.4em
+		padding: 5px 15px
+		border-bottom: solid 1px black
+		margin-bottom: 5px
+		a
+			color: black
+			text-decoration: none
+		a:hover
+			color: navy
+			text-decoration: underline
+
+_ Thumbnail de una imagen pequeña para la galería
+$mixin ThumbImageSmall
+	img
+		margin: 10px
+		width: 180px
+		height: 180px
+	img:hover
+		margin: 5px
+		width: 185px
+		height: 185px
+		
+_ Thumbnail de una imagen
+$mixin ThumbImage
+	display: block
+	width: 160px
+	height: 160px
+	margin-left: 10px
+	float: left
+	border: 1px solid #B1B1B1
+	background-color: #E3E3E3
+	border-radius: 5px 5px 5px 5px
+	box-shadow: 5px 5px black
+	img
+		display: inline
+		margin: 5px
+		width: 150px
+		height: 150px
+	img:hover
+		width: 160px
+		height: 160px
+		margin: 0px
+		
+_ Imagen principal de un artículo
+$mixin ArticleImage
+	display: block
+	float: left
+	border: 1px solid #B1B1B1
+	background-color: #E3E3E3
+	border-radius: 5px 5px 5px 5px
+	box-shadow: 5px 5px black
+	img
+		display: inline
+		margin: 5px
+		
+_ Lista horizontal
+$mixin HorizontalList
+	clear: right
+	margin-top: 10px
+	margin-bottom: 10px
+	ul
+		display: inline
+		list-style: none
+		font-size: 0.8em
+		li
+			float: left
+			margin-left: 5px
+			a
+				color: blue
+				text-decoration: none
+			a:hover
+				text-decoration: underline
+				
+_ Layout para los aside
+$mixin LayoutAside
+	padding: 10px
+	background-color: $AsideColorBackground
+	margin-top: 5px
+	margin-bottom: 20px
+	border-radius: 13px
+	border: 1px solid #242808
+	opacity: 0.8
+	
+_ Cabecera para los aside
+$mixin HeaderAside
+	padding: 9px 15px 0 0
+	color: black
+	font-size: 1.3em
+	border-bottom: 1px solid black
+	margin-bottom: 5px
+
+_ Lista para los aside
+$mixin ListAside
+	ul
+		margin: 15px 0 15px 0
+		li
+			list-style-type: none
+			background: url(images/bullet.png) no-repeat
+			margin: 0
+			padding: 0 0 4px 28px
+			line-height: 1.5em
+			a
+				color: #222
+				text-decoration: none
+			a:hover
+				color:red
+				text-decoration: underline
+			ul
+				margin: 0px

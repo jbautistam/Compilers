@@ -1,0 +1,32 @@
+﻿$ColorRed: red
+$FontSize:8px
+$ColorBackground: blue
+$BorderStyle: dotted 
+$BorderWidth: 1px 
+$BorderColor: black
+$BorderFullStyle: dotted 1px black
+
+@mixin Borders
+	border-style: dotted
+	border-width: 2px
+	border-color: $ColorRed
+
+@mixin BlockData
+	border: $BorderFullStyle
+	h1
+		font-size: 2em
+		a
+			text-decoration: none
+		a:hover
+			text-decoration: underline
+
+
+@mixin ArticleBlockData
+	border: 1px solid black
+	h1
+		font-size: 2em
+		a
+			text-decoration: none
+		a:hover
+			text-decoration: underline
+		@include Borders

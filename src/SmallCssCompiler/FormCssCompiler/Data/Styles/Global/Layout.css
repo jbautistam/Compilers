@@ -1,0 +1,32 @@
+﻿/* Layout de Cosmos para las Web que no tienen un estilo determinado */
+
+/* Logo de la página de inicio de sesión */
+body #page #header #logo
+	{ width: 87px;
+	  height: 107px;
+		display: inline-block;
+		float: left;
+		background: white url("../../images/Logos/LogoGrupoBC.png") no-repeat;
+		background-position: center center;
+	}
+		
+/* Logo superior de la cabecera de página de Cosmos */
+.logoTop
+	{ background: white url("images/LogoHeaderGrupoBC.bmp") no-repeat;
+	  width: 145px;
+	  height: 20px;
+	}
+		
+/* Logo inferior de la cabecera de página de Cosmos */
+.logoBottom
+	{ background: white url("images/LogoHeaderCosmos.bmp") no-repeat;
+	  width: 145px;
+	  height: 20px;
+	}
+		
+/* Logo inferior de la cabecera de página de Cosmos cuando se presenta sólo la parte inferior del menú */
+.logoBottomFull
+	{ background: white url("images/LogoHeaderGrupoBCFull.gif") no-repeat;
+	  width: 200px;
+	  height: 20px;
+	}

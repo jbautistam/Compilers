@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Bau.Libraries.LibCommonHelper.Extensors;
 using Bau.Libraries.Compiler.LibInterpreter.Context;
 using Bau.Libraries.Compiler.LibInterpreter.Context.Variables;
 using Bau.Libraries.Compiler.LibInterpreter.Expressions;
@@ -12,6 +13,27 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Evaluator
 	/// </summary>
 	public class ExpressionCompute
 	{
+		/// <summary>
+		///		Enumerado con el tipo de operación que se debe hacer sobre una fecha
+		/// </summary>
+		private enum DateOperation
+		{
+			/// <summary>Añadir / restar días</summary>
+			Day,
+			/// <summary>Añadir / restar meses</summary>
+			Month,
+			/// <summary>Añadir / restar semanas</summary>
+			Week,
+			/// <summary>Añadir / restar años</summary>
+			Year,
+			/// <summary>Añadir / restar horas</summary>
+			Hour,
+			/// <summary>Añadir / restar minutos</summary>
+			Minutes,
+			/// <summary>Añadir / restar segundos</summary>
+			Seconds
+		}
+
 		/// <summary>
 		///		Evalúa una serie de expresiones
 		/// </summary>
@@ -44,13 +66,13 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Evaluator
 					VariableModel indexVariable = Compute(context, expressionVariable.IndexExpressionsRPN, out error);
 
 						if (indexVariable.Type != VariableModel.VariableType.Numeric)
-							error = "La expresión del índice no tiene un valor numérico";
+							error = "Index expression is not a numeric value";
 						else
 							index = (int) indexVariable.Value;
 				}
 				// Si no hay ningún error, obtiene la variable
 				if (string.IsNullOrWhiteSpace(error))
-					variable = context.Variables.Get(expressionVariable.Name, index);
+					variable = context.VariablesTable.Get(expressionVariable.Name, index);
 				// Devuelve la variable
 				return variable;
 		}
@@ -77,14 +99,14 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Evaluator
 
 										// Comprueba que se haya encontrado la variable
 										if (variable == null)
-											error = "No se encuentra el valor de la variable";
+											error = "Cant find the variable value";
 										// Si no hay ningún error, se añade la variable a la pila
 										if (string.IsNullOrWhiteSpace(error))
 											stackOperators.Push(variable);
 								break;
 							case ExpressionOperatorBase expression:
 									if (stackOperators.Count < 2)
-										error = "No existen suficientes operandos en la pila para ejecutar la operación";
+										error = "Ther is not enough operators in stack for execute this operation";
 									else
 									{
 										VariableModel second = stackOperators.Pop(); //? cuidado al sacar de la pila, están al revés
@@ -102,12 +124,12 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Evaluator
 					return stackOperators.Pop();
 				else if (stackOperators.Count == 0)
 				{
-					error = "No hay ningún operador en la pila de operaciones";
+					error = "There is no operators in the operations stack";
 					return null; 
 				}
 				else
 				{
-					error = "Hay más de un operador en la pila de instrucciones";
+					error = "There are too much operator in the operations stack";
 					return null;
 				}
 		}
@@ -128,7 +150,7 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Evaluator
 				case VariableModel.VariableType.Numeric:
 					return ComputeNumeric(expression, first, second, out error);
 				default:
-					error = "Tipo desconocido";
+					error = "Unknow type";
 					return null;
 			}
 		}
@@ -164,13 +186,13 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Evaluator
 												return new VariableModel("Result", firstValue * secondValue);
 											case ExpressionOperatorMath.MathType.Divide:
 													if (secondValue == 0)
-														error = "No se puede dividir por cero";
+														error = "Cant divide by zero";
 													else
 														return new VariableModel("Result", firstValue / secondValue);
 												break;
 											case ExpressionOperatorMath.MathType.Modulus:
 												if (secondValue == 0)
-													error = "No se puede calcular un módulo por cero";
+													error = "Cant compute a module by zero";
 												else
 													return new VariableModel("Result", firstValue % secondValue);
 												break;
@@ -198,7 +220,7 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Evaluator
 			}
 			// Si ha llegado hasta aquí es porque no se ha podido evaluar la operación
 			if (string.IsNullOrEmpty(error))
-				error = "No se puede ejecutar esta operación con un valor numérico";
+				error = "Cant execute this operation with a numeric value";
 			return null;
 		}
 
@@ -217,14 +239,28 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Evaluator
 					case VariableModel.VariableType.Numeric:
 							if (expression is ExpressionOperatorMath operation)
 							{
-								double days = (double) second.Value;
+								int interval = (int) second.Value;
 
 									switch (operation.Type)
 									{
 										case ExpressionOperatorMath.MathType.Sum:
-											return new VariableModel("Result", firstValue.AddDays(days));
+											return new VariableModel("Result", ComputeDate(firstValue, true, interval, DateOperation.Day));
 										case ExpressionOperatorMath.MathType.Substract:
-											return new VariableModel("Result", firstValue.AddDays(-1 * days));
+											return new VariableModel("Result", ComputeDate(firstValue, false, interval, DateOperation.Day));
+									}
+							}
+						break;
+					case VariableModel.VariableType.String:
+							if (expression is ExpressionOperatorMath operationString)
+							{
+								(int interval, DateOperation dateOperation) = GetDateIncrement(second.Value?.ToString());
+
+									switch (operationString.Type)
+									{
+										case ExpressionOperatorMath.MathType.Sum:
+											return new VariableModel("Result", ComputeDate(firstValue, true, interval, dateOperation));
+										case ExpressionOperatorMath.MathType.Substract:
+											return new VariableModel("Result", ComputeDate(firstValue, false, interval, dateOperation));
 									}
 							}
 						break;
@@ -252,8 +288,85 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Evaluator
 						break;
 				}
 				// Si ha llegado hasta aquí es porque no se ha podido evaluar la operación
-				error = "No se puede ejecutar esta operación con una fecha";
+				error = "Can execute this operation with a date";
 				return null;
+		}
+
+		/// <summary>
+		///		Obtiene los valores de un incremento para una fecha
+		/// </summary>
+		private (int increment, DateOperation type) GetDateIncrement(string value)
+		{
+			DateOperation type = DateOperation.Day;
+			string incrementValue = string.Empty;
+
+				// Obtiene el tipo de incremento
+				value = value.ToUpper();
+				if (value.EndsWith("W"))
+					type = DateOperation.Week;
+				else if (value.EndsWith("M"))
+					type = DateOperation.Month;
+				else if (value.EndsWith("Y"))
+					type = DateOperation.Year;
+				else if (value.EndsWith("H"))
+					type = DateOperation.Hour;
+				else if (value.EndsWith("N"))
+					type = DateOperation.Minutes;
+				else if (value.EndsWith("S"))
+					type = DateOperation.Seconds;
+				// Quita el tipo de incremento
+				if (value.EndsWith("D") || value.EndsWith("W") || value.EndsWith("M") || value.EndsWith("Y") || value.EndsWith("H") ||
+					value.EndsWith("N") || value.EndsWith("S"))
+				{
+					if (value.Length > 1)
+						value = value.Substring(0, value.Length - 1);
+					else
+						value = "1";
+				}
+				// Obtiene el incremento
+				if (value.GetInt() == null)
+					throw new NotImplementedException("The increment has no value");
+				else
+					return (value.GetInt(0), type);
+		}
+
+		/// <summary>
+		///		Calcula una operación sobre una fecha
+		/// </summary>
+		private DateTime ComputeDate(DateTime date, bool sum, int interval, DateOperation operation)
+		{
+			DateTime result = date;
+
+				// Cambia el signo de la operación
+				if (!sum)
+					interval = -1 * interval;
+				// Añade el intervalo a la fecha
+				switch (operation)
+				{
+					case DateOperation.Day:
+							result = result.AddDays(interval);
+						break;
+					case DateOperation.Week:
+							result = result.AddDays(7 * interval);
+						break;
+					case DateOperation.Month:
+							result = result.AddMonths(interval);
+						break;
+					case DateOperation.Year:
+							result = result.AddYears(interval);
+						break;
+					case DateOperation.Hour:
+							result = result.AddHours(interval);
+						break;
+					case DateOperation.Minutes:
+							result = result.AddMinutes(interval);
+						break;
+					case DateOperation.Seconds:
+							result = result.AddSeconds(interval);
+						break;
+				}
+				// Devuelve la fecha final
+				return result;
 		}
 
 		/// <summary>
@@ -294,7 +407,7 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Evaluator
 						break;
 				}
 				// Si ha llegado hasta aquí es porque no se puede ejecutar la operación
-				error = "No se puede ejecutar esta operación con una cadena";
+				error = "Cant execute this operation with a string";
 				return null;
 		}
 
@@ -324,29 +437,29 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Evaluator
 				if (second.Value != null)
 					secondValue = (bool) second.Value;
 				// Ejecuta la operación
-					switch (expression)
-					{
-						case ExpressionOperatorLogical logical:
-								switch (logical.Type)
-								{
-									case ExpressionOperatorLogical.LogicalType.Distinct:
-										return new VariableModel("Result", firstValue != secondValue);
-									case ExpressionOperatorLogical.LogicalType.Equal:
-										return new VariableModel("Result", firstValue == secondValue);
-								}
-							break;
-						case ExpressionOperatorRelational relational:
-								switch (relational.Type)
-								{
-									case ExpressionOperatorRelational.RelationalType.And:
-										return new VariableModel("Result", firstValue && secondValue);
-									case ExpressionOperatorRelational.RelationalType.Or:
-										return new VariableModel("Result", firstValue || secondValue);
-								}
-							break;
-					}
+				switch (expression)
+				{
+					case ExpressionOperatorLogical logical:
+							switch (logical.Type)
+							{
+								case ExpressionOperatorLogical.LogicalType.Distinct:
+									return new VariableModel("Result", firstValue != secondValue);
+								case ExpressionOperatorLogical.LogicalType.Equal:
+									return new VariableModel("Result", firstValue == secondValue);
+							}
+						break;
+					case ExpressionOperatorRelational relational:
+							switch (relational.Type)
+							{
+								case ExpressionOperatorRelational.RelationalType.And:
+									return new VariableModel("Result", firstValue && secondValue);
+								case ExpressionOperatorRelational.RelationalType.Or:
+									return new VariableModel("Result", firstValue || secondValue);
+							}
+						break;
+				}
 				// Si ha llegado hasta aquí es porque no se ha podido ejecutar la operación
-				error = "No se puede ejecutar la operación con valores lógicos";
+				error = "Cant execute this operation with logic value";
 				return null;
 		}
 	}

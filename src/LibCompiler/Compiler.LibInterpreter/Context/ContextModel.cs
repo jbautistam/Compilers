@@ -9,12 +9,32 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Context
 	{
 		public ContextModel(ContextModel parent)
 		{
+			// Guarda el contexto padre y el índice
 			Parent = parent;
 			if (Parent == null)
 				ScopeIndex = 0;
 			else
 				ScopeIndex = Parent.ScopeIndex + 1;
-			Variables = new Variables.TableVariableModel(this);
+			// Crea las tablas de variables y funciones
+			VariablesTable = new Variables.TableVariableModel(this);
+			FunctionsTable = new Functions.TableFunctionsModel(this);
+		}
+
+		/// <summary>
+		///		Obtiene recursivamente la tabla de variables del contexto
+		/// </summary>
+		public Variables.TableVariableModel GetVariablesRecursive()
+		{
+			Variables.TableVariableModel table = new Variables.TableVariableModel(this);
+
+				// Añade las variables del padre
+				if (Parent != null)
+					table = Parent.GetVariablesRecursive();
+				// Añade las variables propias
+				foreach (System.Collections.Generic.KeyValuePair<string, Variables.VariableModel> item in VariablesTable.GetAll())
+					table.Add(item.Value);
+				// Devuelve la colección de tablas
+				return table;
 		}
 
 		/// <summary>
@@ -23,13 +43,23 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Context
 		public ContextModel Parent { get; }
 
 		/// <summary>
-		///		Variables
+		///		Tabla de variables
 		/// </summary>
-		public Variables.TableVariableModel Variables { get; }
+		public Variables.TableVariableModel VariablesTable { get; }
+
+		/// <summary>
+		///		Tabla de funciones
+		/// </summary>
+		public Functions.TableFunctionsModel FunctionsTable { get; }
 
 		/// <summary>
 		///		Indice del ámbito
 		/// </summary>
 		public int ScopeIndex { get; }
+
+		/// <summary>
+		///		Nombre de la variable que debe devolver el resultado de la función que está activa
+		/// </summary>
+		public string ScopeFuntionResultVariable { get; set; }
 	}
 }

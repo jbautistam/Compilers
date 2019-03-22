@@ -35,48 +35,6 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Context
 				Contexts.RemoveAt(Contexts.Count - 1);
 		}
 
-		///// <summary>
-		/////		Evalúa una condición
-		///// </summary>
-		//public bool EvaluateCondition(Expressions.ExpressionsCollection expressions, out string error)
-		//{
-		//	VariableModel result = new Evaluator.ExpressionCompute().Evaluate(Actual, expressions, out error);
-
-		//		// Calcula el resultado
-		//		if (!string.IsNullOrWhiteSpace(error) || result == null || result.Value == null)
-		//			return false;
-		//		else if (result.Type != VariableModel.VariableType.Boolean)
-		//		{
-		//			error = "Result isn't a logical value";
-		//			return false;
-		//		}
-		//		else
-		//			return (bool) result.Value;
-		//}
-
-		///// <summary>
-		/////		Evalúa una expresión
-		///// </summary>
-		//public VariableModel EvaluateExpression(Expressions.ExpressionsCollection expressions, out string error)
-		//{
-		//	return new Evaluator.ExpressionCompute().Evaluate(Actual, expressions, out error);
-		//}
-
-		///// <summary>
-		/////		Obtiene las variables de contexto
-		///// </summary>
-		//private TableVariableModel GetContextVariables()
-		//{
-		//	var variables = new TableVariableModel(Actual);
-
-		//		// Obtiene una tabla con todas las variables de los contextos
-		//		foreach (ContextModel context in Contexts)
-		//			foreach (KeyValuePair<string, VariableModel> variable in context.Variables.GetAll())
-		//				variables.Add(variable.Value);
-		//		// Devuelve las variables
-		//		return variables;
-		//}
-
 		/// <summary>
 		///		Contexto actual
 		/// </summary>

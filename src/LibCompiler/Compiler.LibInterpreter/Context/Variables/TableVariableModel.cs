@@ -37,20 +37,20 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Context.Variables
 		public void Add(string name, VariableModel.VariableType type)
 		{
 			switch (type)
-				{
-					case VariableModel.VariableType.Boolean:
-							Add(name, false);
-						break;
-					case VariableModel.VariableType.Date:
-							Add(name, null);
-						break;
-					case VariableModel.VariableType.Numeric:
-							Add(name, 0);
-						break;
-					case VariableModel.VariableType.String:
-							Add(name, string.Empty);
-						break;
-				}
+			{
+				case VariableModel.VariableType.Boolean:
+						Add(name, false);
+					break;
+				case VariableModel.VariableType.Date:
+						Add(name, null);
+					break;
+				case VariableModel.VariableType.Numeric:
+						Add(name, 0);
+					break;
+				case VariableModel.VariableType.String:
+						Add(name, string.Empty);
+					break;
+			}
 		}
 
 		/// <summary>
@@ -68,7 +68,7 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Context.Variables
 		}
 
 		/// <summary>
-		///		Clona todas las variables
+		///		Clona todas las variables de este contexto
 		/// </summary>
 		public Dictionary<string, VariableModel> GetAll()
 		{
@@ -84,8 +84,22 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Context.Variables
 		/// <summary>
 		///		Obtiene una variable
 		/// </summary>
-		//TODO --> FALTA buscar por el índice
 		public VariableModel Get(string name, int? index = null)
+		{
+			VariableModel variable = GetIfExists(name, index);
+
+				// Si no existe, crea una variable predeterminada
+				if (variable == null)
+					variable = new VariableModel(name, null);
+				// Devuelve la variable
+				return variable;
+		}
+
+		/// <summary>
+		///		Obtiene una variable
+		/// </summary>
+		//TODO --> FALTA buscar por el índice
+		public VariableModel GetIfExists(string name, int? index = null)
 		{
 			// Normaliza el nombre
 			name = Normalize(name);
@@ -93,9 +107,9 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Context.Variables
 			if (Variables.ContainsKey(name))
 				return Variables[name];
 			else if (Context.Parent != null)
-				return Context.Parent.Variables.Get(name);
+				return Context.Parent.VariablesTable.Get(name);
 			else
-				return new VariableModel(name, null);
+				return null;
 		}
 
 		/// <summary>

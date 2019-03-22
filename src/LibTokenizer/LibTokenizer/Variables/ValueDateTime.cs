@@ -87,7 +87,7 @@ namespace Bau.Libraries.LibTokenizer.Variables
 		/// </summary>
 		public override string Content
 		{
-			get { return $"{Value:dd-MM-yyyy}"; }
+			get { return Value.ToShortDateString(); }
 		}
 
 		/// <summary>

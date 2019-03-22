@@ -123,9 +123,9 @@ namespace Bau.Libraries.Compiler.LibTokenizer.Lexical.Parser
 		/// <summary>
 		///		Comprueba si un carácter es un espacio
 		/// </summary>
-		internal bool CheckIsSpace(string strChar)
+		internal bool CheckIsSpace(string character)
 		{
-			return strChar == " " || strChar == "\t" || strChar == "\r" || strChar == "\n";
+			return character == " " || character == "\t" || character == "\r" || character == "\n";
 		}
 
 		/// <summary>
@@ -137,7 +137,7 @@ namespace Bau.Libraries.Compiler.LibTokenizer.Lexical.Parser
 
 				// Recoge los caracteres
 				for (int index = 0; index < chars; index++)
-					if (!Source.IsEmpty() && IndexActualChar + index < Source.Length)
+					if (!string.IsNullOrWhiteSpace(Source) && IndexActualChar + index < Source.Length)
 						output += Source[IndexActualChar + index];
 				// Devuelve la cadena
 				return output;
@@ -244,7 +244,7 @@ namespace Bau.Libraries.Compiler.LibTokenizer.Lexical.Parser
 		/// </summary>
 		internal bool IsEof
 		{
-			get { return Source.IsEmpty() || IndexActualChar >= Source.Length; }
+			get { return string.IsNullOrWhiteSpace(Source) || IndexActualChar >= Source.Length; }
 		}
 
 		/// <summary>

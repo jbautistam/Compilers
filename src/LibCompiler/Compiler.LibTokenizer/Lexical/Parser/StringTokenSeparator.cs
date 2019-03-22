@@ -83,7 +83,7 @@ namespace Bau.Libraries.Compiler.LibTokenizer.Lexical.Parser
 		{
 			string startRule = GetStartRule(rule.Starts);
 
-				if (!startRule.IsEmpty())
+				if (!string.IsNullOrWhiteSpace(startRule))
 				{ 
 					// Añade la palabra
 					tokens.Add(ReadWord(startRule, rule));
@@ -181,7 +181,7 @@ namespace Bau.Libraries.Compiler.LibTokenizer.Lexical.Parser
 							string actualRule = GetStartRule(rule.Ends);
 
 								// Comprueba si se ha terminado con la palabra ...
-								if (!actualRule.IsEmpty()) // ... si coincide con una de las reglas de fin
+								if (!string.IsNullOrWhiteSpace(actualRule)) // ... si coincide con una de las reglas de fin
 								{
 									if (rule.IncludeEnd)
 										token.Value += CharSeparator.GetChars(actualRule.Length);
@@ -196,7 +196,7 @@ namespace Bau.Libraries.Compiler.LibTokenizer.Lexical.Parser
 						}
 				}
 				// Limpia la palabra
-				if (rule.MustTrim && !token.Value.IsEmpty())
+				if (rule.MustTrim && !string.IsNullOrWhiteSpace(token.Value))
 					token.Value = token.Value.Trim();
 				// Devuelve la palabra
 				return token;

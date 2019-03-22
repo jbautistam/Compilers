@@ -30,21 +30,21 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Evaluator
 								{
 									bool end = false;
 
-									// Paréntesis derecho. Saca todos los elementos del stack hasta encontrar un paréntesis izquierdo
-									while (stackOperators.Count > 0 && !end)
-									{
-										ExpressionBase expressionOperator = stackOperators.Pop();
+										// Paréntesis derecho. Saca todos los elementos del stack hasta encontrar un paréntesis izquierdo
+										while (stackOperators.Count > 0 && !end)
+										{
+											ExpressionBase expressionOperator = stackOperators.Pop();
 
-											if (expressionOperator is ExpressionParenthesis expressionStack)
-											{
-												if (!expressionStack.Open)
-													end = true;
+												if (expressionOperator is ExpressionParenthesis expressionStack)
+												{
+													if (!expressionStack.Open)
+														end = true;
+													else
+														stackOutput.Add(expressionStack);
+												}
 												else
-													stackOutput.Add(expressionStack);
-											}
-											else
-												stackOutput.Add(expressionOperator);
-									}
+													stackOutput.Add(expressionOperator);
+										}
 								}
 							break;
 						case ExpressionOperatorBase expression:
@@ -72,7 +72,7 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Evaluator
 								stackOutput.Add(expression);
 							break;	
 						default:
-								stackOutput.Add(new ExpressionError("Expresión desconocida"));
+								stackOutput.Add(new ExpressionError("Unknown expression"));
 							break;
 					}
 				// Añade todos los elementos que queden en el stack de operadores al stack de salida
@@ -97,25 +97,5 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Evaluator
 			else
 				return false;
 		}
-						//case Token.TokenType.ArithmeticOperator:
-						//case Token.TokenType.LogicalOperator:
-						//case Token.TokenType.RelationalOperator:
-						//	bool endOperator = false;
-
-						//		// Recorre los operadores de la pila 
-						//		while (stackOperators.Count > 0 && !endOperator)
-						//		{
-						//			ExpressionBase lastOperator = stackOperators.Peek();
-
-						//				// Si no hay ningún operador en la pila o la prioridad del operador actual es mayor que la del último de la pila se mete el último operador
-						//				if (lastOperator == null || expression.Token.Type == Token.TokenType.LeftParentesis ||
-						//						expression.Priority > lastOperator.Priority)
-						//					endOperator = true;
-						//				else // ... si el operador tiene una prioridad menor que el último de la fila, se quita el último operador de la pila y se compara de nuevo
-						//					stackOutput.Add(stackOperators.Pop());
-						//		}
-						//		// Añade el operador a la pila de operadores
-						//		stackOperators.Push(expression);
-						//	break;
 	}
 }

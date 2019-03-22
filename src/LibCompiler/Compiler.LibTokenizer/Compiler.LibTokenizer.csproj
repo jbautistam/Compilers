@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\LibHelper.Standard\LibHelper.Standard.csproj" />
+    <ProjectReference Include="..\..\..\..\Common\LibHelper\src\LibHelper.csproj" />
   </ItemGroup>
 
 </Project>

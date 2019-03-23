@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Common\LibHelper\src\LibHelper.csproj" />
+    <PackageReference Include="Bau.Libraries.LibHelper" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

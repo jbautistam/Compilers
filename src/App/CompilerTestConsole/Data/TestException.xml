@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Script>
+	<Print>Start test exception</Print>
+
+	<Exception>One exception</Exception>
+
+	<Print>This must no show</Print>
+</Script>

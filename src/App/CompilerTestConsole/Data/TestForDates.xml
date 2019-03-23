@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Script>
+	<Print>Test Dates for</Print>
+
+	<Print>Start fith for loop with variables StartDate {{StartDate}}, EndDate {{EndDate}} step 15d</Print>
+	<For Variable="Index" Start="StartDate" End="EndDate" Step="15d">
+		<Print>Index: {{Index}}</Print>
+	</For>
+
+	<Print>Start first for loop (1-1-2018 to 3-3-2018 step 5w)</Print>
+	<For Variable="Index" Start="2018-01-01" End="2018-03-03" Step="5w">
+		<Print>Index: {{Index}}</Print>
+	</For>
+
+	<Print>Start second for loop (1-1-2018 to 3-3-2018 step default (1d))</Print>
+	<For Variable="Index" Start="2018-01-01" End="2018-03-03">
+		<Print>Index: {{Index}}</Print>
+	</For>
+
+	<Print>Start third for loop (1-1-2018 to 3-3-2018 step 2d)</Print>
+	<For Variable="Index" Start="2018-01-01" End="2018-03-03" Step="2d">
+		<Print>Index: {{Index}}</Print>
+	</For>
+
+	<Print>Start fourth for loop (1-1-2018 to 3-3-2019 step 2m)</Print>
+	<For Variable="Index" Start="2018-01-01" End="2019-03-03" Step="2m">
+		<Print>Index: {{Index}}</Print>
+	</For>
+</Script>

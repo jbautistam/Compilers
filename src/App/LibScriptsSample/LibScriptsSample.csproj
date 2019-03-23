@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Bau.Libraries.LibScriptsSample</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bau.Libraries.LibDataStructures" Version="1.0.0" />
+    <PackageReference Include="Bau.Libraries.LibHelper" Version="1.0.0" />
+    <PackageReference Include="Bau.Libraries.LibMarkup" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\LibCompiler\Compiler.LibInterpreter\Compiler.LibInterpreter.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -15,8 +15,11 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Processor
 		/// <summary>
 		///		Inicializa los datos de ejecución
 		/// </summary>
-		protected void Initialize()
+		protected void Initialize(Compiler.ParserBase parser, string startVariableAtText = "{{", string endVariableAtText = "}}")
 		{
+			// Crea el intérprete
+			Interpreter = new Compiler.Interpreter(parser, startVariableAtText, endVariableAtText);
+			// Inicializa el contexto
 			Context.Clear();
 			Context.Add();
 		}
@@ -132,7 +135,7 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Processor
 						AddError($"Variable {sentence.Variable} not declared");
 					else
 					{
-						VariableModel result = new Compiler.Interpreter().EvaluateExpression(Context, sentence.Expression, out string error);
+						VariableModel result = Interpreter.EvaluateExpression(Context, sentence.Expression, out string error);
 
 							if (!string.IsNullOrWhiteSpace(error))
 								AddError($"Error when evaluate expression {sentence.Expression}. {error}");
@@ -253,7 +256,7 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Processor
 		/// </summary>
 		private void ExecutePrint(SentencePrint sentence)
 		{
-			string text = new Compiler.Interpreter().EvaluateText(Context.Actual, sentence.Message, out string error);
+			string text = Interpreter.EvaluateText(Context.Actual, sentence.Message, out string error);
 
 				// Log
 				AddDebug($"Print: {sentence.Message}");
@@ -273,7 +276,7 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Processor
 				AddError("Cant find condition for if sentence");
 			else
 			{
-				bool result = new Compiler.Interpreter().EvaluateCondition(Context, sentence.Condition, out string error);
+				bool result = Interpreter.EvaluateCondition(Context, sentence.Condition, out string error);
 
 					if (!string.IsNullOrEmpty(error))
 						AddError(error);
@@ -293,7 +296,7 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Processor
 				AddError("Cant find condition for while loop");
 			else 
 			{
-				bool result = new Compiler.Interpreter().EvaluateCondition(Context, sentence.Condition, out string error);
+				bool result = Interpreter.EvaluateCondition(Context, sentence.Condition, out string error);
 
 					if (!string.IsNullOrEmpty(error))
 						AddError(error);
@@ -342,7 +345,7 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Processor
 										// Si no, se añade la variable con su valor predeterminado
 										if (sentence.ParameterExpressions.Count > index)
 										{
-											VariableModel result = new Compiler.Interpreter().EvaluateExpression(Context, sentence.ParameterExpressions[index], out error);
+											VariableModel result = Interpreter.EvaluateExpression(Context, sentence.ParameterExpressions[index], out error);
 
 												if (string.IsNullOrWhiteSpace(error))
 													Context.Actual.VariablesTable.Add(argument.Name, result.Value);
@@ -392,7 +395,7 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Processor
 				AddError("Cant execute a return because there is not function block");
 			else
 			{
-				VariableModel result = new Compiler.Interpreter().EvaluateExpression(Context, sentence.Expression, out string error);
+				VariableModel result = Interpreter.EvaluateExpression(Context, sentence.Expression, out string error);
 
 					// Si no hay error, añade el resultado al contexto
 					if (!string.IsNullOrWhiteSpace(error))
@@ -421,6 +424,11 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Processor
 		///		Escribe un mensaje en la consola
 		/// </summary>
 		protected abstract void AddConsoleOutput(string message);
+
+		/// <summary>
+		///		Intérprete de expresiones
+		/// </summary>
+		private Compiler.Interpreter Interpreter { get; set; }
 
 		/// <summary>
 		///		Contexto de ejecución

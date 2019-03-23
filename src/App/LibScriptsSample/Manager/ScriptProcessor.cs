@@ -24,7 +24,7 @@ namespace Bau.Libraries.LibScriptsSample.Manager
 			Models.ProgramModel program = new Repository.ScriptRepository().LoadByFile(fileName);
 
 				// Inicializa el generador base
-				Initialize();
+				Initialize(CreateParser(), "{{", "}}");
 				// Añade las variables iniciales
 				foreach (KeyValuePair<string, object> parameter in parameters)
 					Context.Actual.VariablesTable.Add(parameter.Key, parameter.Value);
@@ -34,6 +34,19 @@ namespace Bau.Libraries.LibScriptsSample.Manager
 					AddError($"Can't find sentences at {fileName}");
 				else
 					Execute(program.Sentences);
+		}
+
+		/// <summary>
+		///		Crea el analizador léxico
+		/// </summary>
+		private Parser CreateParser()
+		{
+			Parser parser = new Parser();
+
+				// Inicializa el analizador léxico
+				parser.Initialize();
+				// Devuelve el analizador léxico
+				return parser;
 		}
 
 		/// <summary>

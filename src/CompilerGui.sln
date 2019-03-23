@@ -3,13 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompilerTestConsole", "App\CompilerTestConsole\CompilerTestConsole.csproj", "{AD28F20C-E02B-4A77-914C-90212926BFC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompilerTestConsole", "App\CompilerTestConsole\CompilerTestConsole.csproj", "{AD28F20C-E02B-4A77-914C-90212926BFC7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Compiler.LibTokenizer", "LibCompiler\Compiler.LibTokenizer\Compiler.LibTokenizer.csproj", "{79F7BAE7-3E42-461E-8762-CBB43765796B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Compiler.LibInterpreter", "LibCompiler\Compiler.LibInterpreter\Compiler.LibInterpreter.csproj", "{14F17D08-3E08-41D3-8A21-39E2F3D36DAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibScriptsSample", "App\LibScriptsSample\LibScriptsSample.csproj", "{F495336B-BD05-4184-9DDA-E64C19B1BB52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibScriptsSample", "App\LibScriptsSample\LibScriptsSample.csproj", "{F495336B-BD05-4184-9DDA-E64C19B1BB52}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{C9A89E81-C66C-43C4-AEF4-4D71F3090A59}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Compiler", "Compiler", "{D2C58A61-23D2-43F4-91AE-0BF4AB0C9DBE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{BA56635E-3800-494E-B1FA-B9760F3474EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +42,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{79F7BAE7-3E42-461E-8762-CBB43765796B} = {D2C58A61-23D2-43F4-91AE-0BF4AB0C9DBE}
+		{14F17D08-3E08-41D3-8A21-39E2F3D36DAA} = {D2C58A61-23D2-43F4-91AE-0BF4AB0C9DBE}
+		{F495336B-BD05-4184-9DDA-E64C19B1BB52} = {BA56635E-3800-494E-B1FA-B9760F3474EA}
+		{D2C58A61-23D2-43F4-91AE-0BF4AB0C9DBE} = {C9A89E81-C66C-43C4-AEF4-4D71F3090A59}
+		{BA56635E-3800-494E-B1FA-B9760F3474EA} = {C9A89E81-C66C-43C4-AEF4-4D71F3090A59}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3360B5EB-2398-4352-84C6-E57B2D90A339}

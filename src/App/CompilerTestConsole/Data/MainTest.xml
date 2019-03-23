@@ -2,7 +2,7 @@
 <Job>
 	<!-- Proceso de scripts de tipo for with dates -->
 	<Script FileName="TestForDates.xml">
-		<Parameter Key="StartDate" Type="DateTime" Value="Now" Increment="-3" Interval="Year" Mode="PreviousMonday" />
+		<Parameter Key="StartDate" Type="dateTime" Value="Now" Increment="-3" Interval="Year" Mode="PreviousMonday" />
 		<Parameter Key="EndDate" Type="DateTime" Value="Now" Increment="1" Interval="Day" Mode="NextMonday" />
 	</Script>
 
@@ -12,7 +12,6 @@
 		<Parameter Key="EndIndex" Type="Numeric" Value="40"/>
 		<Parameter Key="StepIndex" Type="Numeric" Value="3"/>
 	</Script>
-
 	
 	<!-- Proceso de scripts de expresiones -->
 	<Script FileName="TestExpressions.xml">

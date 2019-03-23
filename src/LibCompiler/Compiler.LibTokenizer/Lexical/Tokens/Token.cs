@@ -3,7 +3,7 @@
 namespace Bau.Libraries.Compiler.LibTokenizer.Lexical.Tokens
 {
 	/// <summary>
-	///		Clase con los datos de una palabra interpretada en el texto
+	///		Clase con los datos de un token interpretado en el texto
 	/// </summary>
 	public class Token
 	{
@@ -69,7 +69,6 @@ namespace Bau.Libraries.Compiler.LibTokenizer.Lexical.Tokens
 		///		Columna
 		/// </summary>
 		public int Column { get; set; }
-
 
 		/// <summary>
 		///		Indentación

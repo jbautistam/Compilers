@@ -184,12 +184,12 @@ namespace Bau.Libraries.Compiler.LibTokenizer.Lexical.Parser
 				// Añade los caracteres del patrón de contenido
 				while (!end && !IsEof)
 				{
-					string charSource = LookAtChar(1);
+					string source = LookAtChar(1);
 
-					if (!charSource.IsEmpty() && CheckIsAtPattern(charSource[0], patternContent))
-						value += GetChars(1);
-					else
-						end = true;
+						if (!source.IsEmpty() && CheckIsAtPattern(source[0], patternContent))
+							value += GetChars(1);
+						else
+							end = true;
 				}
 				// Devuelve los caracteres
 				return value;

@@ -13,9 +13,12 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Processor.Compiler
 	/// </summary>
 	public class Interpreter
 	{ 
-		// Constantes privadas
-		private const string StartVariable = "{{";
-		private const string EndVariable = "}}";
+		public Interpreter(ParserBase parser, string startVariable, string endVariable)
+		{
+			Parser = parser;
+			StartVariable = startVariable;
+			EndVariable = endVariable;
+		}
 
 		/// <summary>
 		///		Evalúa una condición
@@ -42,7 +45,7 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Processor.Compiler
 		/// </summary>
 		public VariableModel EvaluateExpression(ContextStackModel context, string code, out string error)
 		{
-			ExpressionsCollection expressions = new Parser().Parse(code, out error);
+			ExpressionsCollection expressions = Parser.Parse(code, out error);
 
 				if (string.IsNullOrEmpty(error))
 					return new ExpressionCompute().Evaluate(context.Actual, expressions, out error);
@@ -177,7 +180,7 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Processor.Compiler
 		/// </summary>
 		private string GetFormat(string variable)
 		{
-			string format = "";
+			string format = string.Empty;
 			int startIndex = variable.IndexOf(":");
 
 				// Obtiene el formato
@@ -186,5 +189,20 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Processor.Compiler
 				// Devuelve el formato encontrado
 				return format;
 		}
+
+		/// <summary>
+		///		Intérprete
+		/// </summary>
+		public ParserBase Parser { get; }
+
+		/// <summary>
+		///		Cadena que indica el comienzo del nombre de una variable en texto
+		/// </summary>
+		public string StartVariable { get; }
+
+		/// <summary>
+		///		Cadena que indica el comienzo fin del nombre de una variable en texto
+		/// </summary>
+		public string EndVariable { get; }
 	}
 }

@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Bau.Libraries.LibDataStructures" Version="1.0.0" />
-    <PackageReference Include="Bau.Libraries.LibHelper" Version="1.0.0" />
+    <PackageReference Include="Bau.Libraries.LibHelper" Version="1.0.1" />
     <PackageReference Include="Bau.Libraries.LibMarkup" Version="1.0.0" />
   </ItemGroup>
 

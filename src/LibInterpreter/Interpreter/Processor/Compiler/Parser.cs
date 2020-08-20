@@ -139,7 +139,7 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Processor.Compiler
 											expressions.Add(new ExpressionVariableIdentifier(ActualToken.Value));
 										break;
 									default:
-											expressions.Add(new ExpressionError("Tipo de token desconocido"));
+											expressions.Add(new ExpressionError("Unknown token"));
 										break;
 								}
 							break;
@@ -147,7 +147,7 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Processor.Compiler
 								expressions.Add(new ExpressionVariableIdentifier(ActualToken.Value));
 							break;
 						default:
-								expressions.Add(new ExpressionError("Tipo de expresión desconocido"));
+								expressions.Add(new ExpressionError("Unknown expression"));
 							break;
 					}
 					// Si la última expresión es un error, se detiene
@@ -280,7 +280,7 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Processor.Compiler
 				if (ActualTokenIndex < Tokens.Count)
 					return Tokens[ActualTokenIndex];
 				else
-					return new Token(Token.TokenType.EOF, null, 0, 0, "Fin de programa");
+					return new Token(Token.TokenType.EOF, null, 0, 0, "Program end");
 			}
 		}
 

@@ -226,7 +226,6 @@ namespace Bau.Libraries.Compiler.LibInterpreter.Context.Variables
 		private (int increment, DateIncrement type) GetDateIncrement(string value)
 		{
 			DateIncrement type = DateIncrement.Day;
-			string incrementValue = string.Empty;
 
 				// Obtiene el tipo de incremento
 				value = value.ToUpper();
